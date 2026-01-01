@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import watch_deeplink
+from . import views
 
 urlpatterns = [
-    path("watch/<int:video_id>/", watch_deeplink),
+    path('', views.index, name='index'),  # /dl/
+    path('watch/<int:video_id>/', views.watch_deeplink, name='watch'),  # /dl/watch/101/
 ]
