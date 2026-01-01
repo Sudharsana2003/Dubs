@@ -11,10 +11,17 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+# Load .env file
+dotenv_path = BASE_DIR / ".env"
+if dotenv_path.exists():
+    load_dotenv(dotenv_path)
+else:
+    print("WARNING: .env file not found at", dotenv_path)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
@@ -31,7 +38,10 @@ ALLOWED_HOSTS = [
     "betsy-tangy-alpinely.ngrok-free.dev",  # your ngrok URL
 ]
 
-
+# Dub API Key from .env
+DUB_API_KEY = os.getenv("DUB_API_KEY")
+if not DUB_API_KEY:
+    print("WARNING: DUB_API_KEY not set in .env")
 
 # Application definition
 
